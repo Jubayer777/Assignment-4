@@ -44,31 +44,31 @@
                 <h3>Book Ocean Time</h3>
                 <div class="input-group">
                     <label for="">Flying From</label>
-                    <input id="flying-from" class="inp-style" type="text" name="" placeholder="Dhaka, Bangladesh">
+                    <input id="booking-flying-from" class="inp-style" type="text" name="" placeholder="Dhaka, Bangladesh">
                 </div>
                 <div class="input-group">
                     <label for="">Flying To</label>
-                    <input id="flying-to" class="inp-style" type="text" name="" placeholder="New York, United States">
+                    <input id="booking-flying-to" class="inp-style" type="text" name="" placeholder="New York, United States">
                 </div>
                 <div class="inputs">
                     <div class="input-group">
                         <label" for="">Departure</label>
-                            <input id="departure" class="inp-style" type="date" name="">
+                            <input id="booking-departure" class="inp-style" type="date" name="">
                     </div>
                     <div class="input-group">
                         <label for="">Return</label>
-                        <input id="return" class="inp-style" type="date" name="">
+                        <input id="booking-return" class="inp-style" type="date" name="">
                     </div>
                 </div>
                 <div class="input-group f-class">
                     <div>
                         <label for="">First Class ($150)</label>
-                        <input id="first-count" class="inp-style inp-width" type="text" name="" value="0">
+                        <input id="first-class-count" class="inp-style inp-width" type="text" name="" value="0">
                     </div>
                     <div class="plus-minus-btn">
-                        <button onclick="handleTicket('first',true)" class="btn btn-default"><i
+                        <button onclick="handleTicket('first-class',true)" class="btn btn-default"><i
                                 class="fas fa-plus"></i></button>
-                        <button onclick="handleTicket('first',false)" class="btn btn-default"><i
+                        <button onclick="handleTicket('first-class',false)" class="btn btn-default"><i
                                 class="fas fa-minus"></i></button>
                     </div>
                 </div>
@@ -115,6 +115,8 @@
                 <button onclick="handleBookNowButton ()" class="btn-style">Book Now</button>
             </div>
         </div>
+
+        <!-- invoice area (Extra area)-->
         <div id="invoice-area">
             <div class="invoice-form">
                 <h4 style="text-align: center;">Welcome to Cruise Queen</h4>
@@ -223,11 +225,11 @@
         // function for calculating subtotal, VAT and grand total
         function totalCount(subtotal, taxAmount, totalAmount) {
             //calling function ticketCount() for getting total ticket quantity
-            const firstCount = ticketCount('first');
+            const firstClassCount = ticketCount('first-class');
             const economyCount = ticketCount('economy');
 
             //calculating and updating subtotal
-            const totalPrice = firstCount * 150 + economyCount * 100;
+            const totalPrice = firstClassCount * 150 + economyCount * 100;
             document.getElementById(subtotal).innerText = totalPrice;
 
             //calculating and updating VAT
@@ -250,27 +252,28 @@
         //Function for handling Book Now button
         function handleBookNowButton() {
             //make the main booking page invisible after clicking on Book Now button
-            const bookArea = document.getElementById('booking-area');
-            bookArea.style.display = 'none';
+            const bookingArea = document.getElementById('booking-area');
+            bookingArea.style.display = 'none';
+
             //Make the invoice page visible after clicking on Book Now button
             const invoiceArea = document.getElementById('invoice-area');
             invoiceArea.style.display = 'block';
 
             //update invoice Ticket Information
-            document.getElementById('first-ticket').innerText = ticketCount('first');
+            document.getElementById('first-ticket').innerText = ticketCount('first-class');
             document.getElementById('economy-ticket').innerText = ticketCount('economy');
 
             //Update invoice Price Information
             totalCount('invoice-subtotal', 'invoice-tax', 'invoice-total');
 
             //Update invoice Flying From
-            updateInvoiceBooking('invoice-flying-from', 'flying-from');
+            updateInvoiceBooking('invoice-flying-from', 'booking-flying-from');
             //Update invoice Flying To
-            updateInvoiceBooking('invoice-flying-to', 'flying-to');
+            updateInvoiceBooking('invoice-flying-to', 'booking-flying-to');
             //Update invoice Departure Date
-            updateInvoiceBooking('invoice-departure', 'departure');
+            updateInvoiceBooking('invoice-departure', 'booking-departure');
             //Update invoice Return Date
-            updateInvoiceBooking('invoice-return', 'return');
+            updateInvoiceBooking('invoice-return', 'booking-return');
         }
 
 
